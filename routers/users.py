@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from models.users import UserModel
+from models.users import UserModel, RepoModel
 
 import requests
 
@@ -35,3 +35,19 @@ async def get_user_info(username: str) -> UserModel:
         raise HTTPException(404, detail="User '" + username + "' not found")
     else:
         raise HTTPException(500, detail="Couldn't retrieve info of user '" + username + "'")
+    
+@router.get('/{username}/repos')
+async def get_user_repos(username: str) ->list[RepoModel]:
+    """
+    Retrieve information about a GitHub user
+
+    This endpoint send a request to the GitHub Rest API to get the list of public repos of the user
+
+    """
+    res = requests.get(BASEURL + username + '/repos')
+    if res.status_code == 200:
+        return res.json()
+    elif res.status_code == 404:
+        raise HTTPException(404, detail="User '" + username + "' not found")
+    else:
+        raise HTTPException(500, detail="Couldn't retrieve repos of user '" + username + "'")
