@@ -16,7 +16,7 @@ sudo apt-get install python3.6 #ou python3.10
 ## 2. Installation des librairies
 
 Le projet nécessite plusieurs librairies pour pouvoir 
-s'exécuter correctement. Pour les installer lancer les lignes de commandes suivantes: 
+s'exécuter correctement. Pour les installer, lancez les lignes de commandes suivantes: 
 ```bash
 pip install fastapi
 pip install "uvicorn[standard]"
